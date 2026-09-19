@@ -14,7 +14,7 @@ load_dotenv()
 st.set_page_config(
     page_title="PDF Chat AI",
     page_icon="📄",
-    layout="wide"
+    layout="centered"
 )
 
 # ─── Premium CSS ──────────────────────────────────────────────
@@ -24,26 +24,23 @@ st.markdown("""
 
 * { font-family: 'Inter', sans-serif; }
 
-.stApp {
-    background: #070711;
-    color: #E0E0F0;
-}
+.stApp { background: #070711; color: #E0E0F0; }
 
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 header {visibility: hidden;}
 
 .main .block-container {
-    padding: 2rem 3rem;
-    max-width: 1400px;
+    padding: 1.5rem 1.5rem;
+    max-width: 800px;
 }
 
 .user-msg {
     background: rgba(99,102,241,0.12);
     border: 1px solid rgba(99,102,241,0.25);
-    border-radius: 12px 12px 4px 12px;
+    border-radius: 16px 16px 4px 16px;
     padding: 14px 18px;
-    margin: 10px 0 10px 40px;
+    margin: 8px 0 8px 30px;
     color: #E0E0FF;
     font-size: 14px;
     line-height: 1.6;
@@ -52,55 +49,40 @@ header {visibility: hidden;}
 .ai-msg {
     background: rgba(15,15,30,0.8);
     border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px 12px 12px 4px;
+    border-radius: 16px 16px 16px 4px;
     padding: 14px 18px;
-    margin: 10px 40px 10px 0;
+    margin: 8px 30px 8px 0;
     color: #C8C8E0;
     font-size: 14px;
     line-height: 1.6;
 }
 
 .user-label {
-    font-size: 11px;
+    font-size: 10px;
     color: #6366F1;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+    margin-top: 16px;
 }
 
 .ai-label {
-    font-size: 11px;
+    font-size: 10px;
     color: #00FFB2;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 6px;
-}
-
-.pdf-card {
-    background: rgba(0,255,178,0.05);
-    border: 1px solid rgba(0,255,178,0.2);
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
-}
-
-.metric-box {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 8px;
-    padding: 10px 16px;
-    flex: 1;
-    text-align: center;
+    margin-bottom: 4px;
+    margin-top: 16px;
 }
 
 .stTextInput > div > div > input {
     background: rgba(255,255,255,0.04) !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
-    border-radius: 10px !important;
+    border-radius: 12px !important;
     color: #E0E0F0 !important;
-    padding: 12px 16px !important;
+    padding: 14px 16px !important;
     font-size: 14px !important;
 }
 
@@ -113,8 +95,8 @@ header {visibility: hidden;}
     background: linear-gradient(135deg, #6366F1, #8B5CF6) !important;
     color: white !important;
     border: none !important;
-    border-radius: 10px !important;
-    padding: 10px 24px !important;
+    border-radius: 12px !important;
+    padding: 12px 24px !important;
     font-weight: 600 !important;
     font-size: 14px !important;
     transition: all 0.2s !important;
@@ -126,34 +108,61 @@ header {visibility: hidden;}
     box-shadow: 0 8px 24px rgba(99,102,241,0.3) !important;
 }
 
+.stFileUploader > div {
+    background: rgba(99,102,241,0.05) !important;
+    border: 2px dashed rgba(99,102,241,0.3) !important;
+    border-radius: 16px !important;
+    padding: 10px !important;
+}
+
+.stProgress > div > div {
+    background: linear-gradient(90deg, #6366F1, #00FFB2) !important;
+    border-radius: 4px !important;
+}
+
 hr {
     border-color: rgba(255,255,255,0.06) !important;
+    margin: 16px 0 !important;
 }
 
-section[data-testid="stSidebar"] {
-    background: #0D0D1A !important;
-    border-right: 1px solid rgba(255,255,255,0.06) !important;
+.metric-container {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-align: center;
 }
 
-section[data-testid="stSidebar"] * {
-    color: #E0E0F0 !important;
+[data-testid="stMetricValue"] {
+    color: #6366F1 !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: #555 !important;
+    font-size: 11px !important;
+}
+
+.streamlit-expanderHeader {
+    background: rgba(255,255,255,0.02) !important;
+    border-radius: 8px !important;
+    color: #555 !important;
+    font-size: 12px !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
 }
 
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #070711; }
 ::-webkit-scrollbar-thumb { background: #1A1A2E; border-radius: 2px; }
 
-.stFileUploader > div {
-    background: rgba(99,102,241,0.05) !important;
-    border: 2px dashed rgba(99,102,241,0.3) !important;
-    border-radius: 12px !important;
-}
-
-.streamlit-expanderHeader {
-    background: rgba(255,255,255,0.03) !important;
-    border-radius: 8px !important;
-    color: #888 !important;
-    font-size: 12px !important;
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .main .block-container {
+        padding: 1rem 1rem;
+    }
+    .user-msg { margin-left: 10px; }
+    .ai-msg { margin-right: 10px; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -170,7 +179,7 @@ def get_chroma():
 embedding_model = load_embedding_model()
 chroma_client = get_chroma()
 
-# ─── API Key from .env ────────────────────────────────────────
+# ─── API Key ──────────────────────────────────────────────────
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # ─── Session State ────────────────────────────────────────────
@@ -239,14 +248,9 @@ def generate_answer(question, chunks, history):
 
     prompt = f"""You are an intelligent document assistant.
 Answer questions accurately based ONLY on the document content.
-
-Rules:
-- Answer ONLY from the provided context
-- Be detailed and specific
-- List all relevant points you find
-- If asked to summarize give a complete summary
-- Never say information is unavailable if it exists in context
-- Use bullet points for lists
+Be detailed and specific. List all relevant points.
+Never say information is unavailable if it exists in context.
+Use bullet points for lists.
 
 {history_text}
 Document Context:
@@ -265,222 +269,161 @@ Detailed Answer:"""
     )
     return response.choices[0].message.content
 
-# ─── SIDEBAR ──────────────────────────────────────────────────
-with st.sidebar:
-    st.markdown("## 📄 PDF Chat AI")
-    st.markdown("---")
-    st.markdown("### Upload Document")
-
-    uploaded_file = st.file_uploader(
-        "Choose PDF",
-        type=["pdf"],
-        label_visibility="collapsed"
-    )
-
-    if uploaded_file:
-        if uploaded_file.name != st.session_state.pdf_name:
-            st.session_state.pdf_ready = False
-            st.session_state.messages = []
-            st.session_state.pdf_name = uploaded_file.name
-
-        if not st.session_state.pdf_ready:
-            progress = st.progress(0)
-            status = st.empty()
-
-            status.text("📖 Reading PDF...")
-            progress.progress(25)
-            text, pages = extract_text_from_pdf(uploaded_file)
-
-            status.text("✂️ Creating chunks...")
-            progress.progress(50)
-            chunks = chunk_text(text)
-
-            status.text("🧠 Building embeddings...")
-            progress.progress(75)
-            collection = build_vector_store(chunks)
-
-            progress.progress(100)
-            status.text("✅ Ready!")
-
-            st.session_state.collection = collection
-            st.session_state.pdf_ready = True
-            st.session_state.pdf_stats = {
-                "name": uploaded_file.name,
-                "pages": pages,
-                "chunks": len(chunks),
-                "chars": len(text)
-            }
-
-        if st.session_state.pdf_ready:
-            st.markdown("---")
-            st.markdown("### 📊 Document Info")
-            stats = st.session_state.pdf_stats
-            st.markdown(f"""
-            <div class='pdf-card'>
-                <div style='font-size:12px; color:#00FFB2;
-                font-weight:600; margin-bottom:12px;'>
-                    ✅ {stats['name'][:30]}
-                </div>
-                <div style='display:flex; gap:8px;'>
-                    <div class='metric-box'>
-                        <div style='font-size:20px; font-weight:700;
-                        color:#6366F1;'>{stats['pages']}</div>
-                        <div style='font-size:10px; color:#555;
-                        margin-top:2px;'>Pages</div>
-                    </div>
-                    <div class='metric-box'>
-                        <div style='font-size:20px; font-weight:700;
-                        color:#6366F1;'>{stats['chunks']}</div>
-                        <div style='font-size:10px; color:#555;
-                        margin-top:2px;'>Chunks</div>
-                    </div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-    st.markdown("---")
-
-    if st.button("🗑️ Clear Chat History"):
-        st.session_state.messages = []
-        st.rerun()
-
-    if st.session_state.messages:
-        st.markdown(
-            f"**💬 {len(st.session_state.messages)} messages**"
-        )
-
-    st.markdown("---")
-    st.markdown("""
-    <div style='font-size:11px; color:#444; line-height:2;'>
-        <b style='color:#666;'>How it works:</b><br>
-        1. Upload any PDF<br>
-        2. PDF is chunked and embedded<br>
-        3. Ask any question<br>
-        4. AI finds relevant chunks<br>
-        5. Get accurate answers!
-    </div>
-    """, unsafe_allow_html=True)
-
-# ─── MAIN AREA ────────────────────────────────────────────────
+# ─── UI ───────────────────────────────────────────────────────
 
 # Header
 st.markdown("""
-<div style='text-align:center; padding:20px 0 10px;'>
-    <h1 style='font-size:2.5rem; font-weight:800;
+<div style='text-align:center; padding:24px 0 8px;'>
+    <h1 style='font-size:2rem; font-weight:800;
     color:#fff; letter-spacing:-1px; margin:0;'>
-        PDF <span style='background:linear-gradient(135deg,#6366F1,#00FFB2);
+        📄 PDF <span style='background:linear-gradient(
+        135deg,#6366F1,#00FFB2);
         -webkit-background-clip:text;
-        -webkit-text-fill-color:transparent;'>Chat AI</span>
+        -webkit-text-fill-color:transparent;'>
+        Chat AI</span>
     </h1>
-    <p style='color:#555; font-size:15px; margin-top:8px;'>
-        Upload any PDF and have an intelligent conversation with it
+    <p style='color:#444; font-size:13px; margin-top:8px;'>
+        Upload any PDF and chat with it using AI
     </p>
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("---")
+st.divider()
 
-# Chat messages
+# ─── Upload Section ───────────────────────────────────────────
+uploaded_file = st.file_uploader(
+    "📄 Upload your PDF here",
+    type=["pdf"],
+    help="Upload any PDF document to start chatting"
+)
+
+if uploaded_file:
+    # Detect new PDF
+    if uploaded_file.name != st.session_state.pdf_name:
+        st.session_state.pdf_ready = False
+        st.session_state.messages = []
+        st.session_state.pdf_name = uploaded_file.name
+
+    # Process PDF
+    if not st.session_state.pdf_ready:
+        progress = st.progress(0)
+        status = st.empty()
+
+        status.text("📖 Reading PDF...")
+        progress.progress(20)
+        text, pages = extract_text_from_pdf(uploaded_file)
+
+        status.text("✂️ Creating chunks...")
+        progress.progress(45)
+        chunks = chunk_text(text)
+
+        status.text("🧠 Building embeddings...")
+        progress.progress(75)
+        collection = build_vector_store(chunks)
+
+        progress.progress(100)
+        status.empty()
+        progress.empty()
+
+        st.session_state.collection = collection
+        st.session_state.pdf_ready = True
+        st.session_state.pdf_stats = {
+            "name": uploaded_file.name,
+            "pages": pages,
+            "chunks": len(chunks),
+        }
+        st.success("✅ PDF processed and ready to chat!")
+
+    # Show PDF stats
+    if st.session_state.pdf_ready:
+        stats = st.session_state.pdf_stats
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("📄 Document",
+                stats['name'][:12] + "..." if len(stats['name']) > 12
+                else stats['name'])
+        with col2:
+            st.metric("📑 Pages", stats['pages'])
+        with col3:
+            st.metric("🧩 Chunks", stats['chunks'])
+
+st.divider()
+
+# ─── Chat Section ─────────────────────────────────────────────
 if not st.session_state.pdf_ready:
+    # Empty state
     st.markdown("""
-    <div style='text-align:center; padding:80px 20px;'>
-        <div style='font-size:72px; margin-bottom:20px;'>📄</div>
-        <h3 style='color:#fff; font-weight:700; margin-bottom:10px;'>
+    <div style='text-align:center; padding:60px 20px;'>
+        <div style='font-size:56px; margin-bottom:16px;'>📄</div>
+        <h3 style='color:#fff; font-weight:700;
+        margin-bottom:8px; font-size:1.3rem;'>
             No Document Loaded
         </h3>
-        <p style='color:#555; font-size:14px;
-        max-width:400px; margin:0 auto;'>
-            Upload a PDF from the sidebar to start chatting.
-            Ask questions, get summaries, extract information!
+        <p style='color:#444; font-size:14px;
+        max-width:300px; margin:0 auto;'>
+            Upload a PDF above to start
+            an intelligent conversation!
         </p>
     </div>
     """, unsafe_allow_html=True)
-
-elif not st.session_state.messages:
-    st.markdown(f"""
-    <div style='text-align:center; padding:40px 20px;'>
-        <div style='font-size:56px; margin-bottom:16px;'>🚀</div>
-        <h3 style='color:#fff; font-weight:700; margin-bottom:8px;'>
-            Document Ready!
-        </h3>
-        <p style='color:#555; font-size:14px;'>
-            Ask anything about
-            <b style='color:#6366F1;'>
-            {st.session_state.pdf_stats.get('name', 'your document')}
-            </b>
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div style='text-align:center; margin-bottom:16px;'>
-        <span style='font-size:11px; color:#333;
-        letter-spacing:2px; text-transform:uppercase;'>
-            Suggested Questions
-        </span>
-    </div>
-    """, unsafe_allow_html=True)
-
-    suggestions = [
-        "Summarize this document",
-        "What are the main topics?",
-        "List all important points",
-        "What technologies are mentioned?",
-    ]
-    cols = st.columns(2)
-    for i, s in enumerate(suggestions):
-        with cols[i % 2]:
-            if st.button(s, key=f"sug_{i}"):
-                st.session_state.auto_question = s
-                st.rerun()
 
 else:
-    for msg in st.session_state.messages:
-        st.markdown(f"""
-        <div class='user-label'>You</div>
-        <div class='user-msg'>{msg['question']}</div>
-        """, unsafe_allow_html=True)
-
-        st.markdown(f"""
-        <div class='ai-label'>AI Assistant</div>
-        <div class='ai-msg'>{msg['answer']}</div>
-        """, unsafe_allow_html=True)
-
-        if 'chunks' in msg:
-            with st.expander("📚 View source chunks"):
-                for j, chunk in enumerate(msg['chunks']):
-                    st.markdown(f"**Chunk {j+1}:**")
-                    st.markdown(f"""
-                    <div style='background:rgba(255,255,255,0.02);
-                    border:1px solid rgba(255,255,255,0.06);
-                    border-radius:8px; padding:12px;
-                    font-size:12px; color:#888; line-height:1.6;'>
-                        {chunk}
-                    </div>
-                    """, unsafe_allow_html=True)
-
-# ─── Input Area ───────────────────────────────────────────────
-st.markdown("---")
-
-if st.session_state.pdf_ready:
-    default_q = ""
-    if hasattr(st.session_state, 'auto_question'):
-        default_q = st.session_state.auto_question
-        del st.session_state.auto_question
-
-    col1, col2 = st.columns([5, 1])
-
-    with col1:
-        question = st.text_input(
-            "question",
-            placeholder="Ask anything about your document...",
-            label_visibility="collapsed",
-            value=default_q,
-            key="q_input"
-        )
-
+    # Clear button
+    col1, col2 = st.columns([3, 1])
     with col2:
-        ask = st.button("Send 🚀", use_container_width=True)
+        if st.button("🗑️ Clear", use_container_width=True):
+            st.session_state.messages = []
+            st.rerun()
+
+    # Chat messages
+    if not st.session_state.messages:
+        st.markdown("""
+        <div style='text-align:center; padding:40px 20px;'>
+            <div style='font-size:44px; margin-bottom:14px;'>
+                💬
+            </div>
+            <p style='color:#444; font-size:14px;'>
+                Ask anything about your document!
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        for msg in st.session_state.messages:
+            st.markdown(
+                f"<div class='user-label'>You</div>"
+                f"<div class='user-msg'>{msg['question']}</div>",
+                unsafe_allow_html=True
+            )
+            st.markdown(
+                f"<div class='ai-label'>AI Assistant</div>"
+                f"<div class='ai-msg'>{msg['answer']}</div>",
+                unsafe_allow_html=True
+            )
+            if 'chunks' in msg:
+                with st.expander("📚 View source chunks"):
+                    for j, chunk in enumerate(msg['chunks']):
+                        st.markdown(f"**Chunk {j+1}:**")
+                        st.markdown(f"""
+                        <div style='background:rgba(255,255,255,0.02);
+                        border:1px solid rgba(255,255,255,0.06);
+                        border-radius:8px; padding:10px;
+                        font-size:12px; color:#777;
+                        line-height:1.6; margin-bottom:8px;'>
+                            {chunk}
+                        </div>
+                        """, unsafe_allow_html=True)
+
+    st.divider()
+
+    # Input area
+    question = st.text_input(
+        "question",
+        placeholder="Ask anything about your PDF...",
+        label_visibility="collapsed",
+        key="q_input"
+    )
+
+    ask = st.button("🚀 Send Message", use_container_width=True)
 
     if ask and question:
         with st.spinner("🔍 Searching document..."):
@@ -494,7 +437,6 @@ if st.session_state.pdf_ready:
                 chunks,
                 st.session_state.messages
             )
-
         st.session_state.messages.append({
             "question": question,
             "answer": answer,
@@ -504,15 +446,3 @@ if st.session_state.pdf_ready:
 
     elif ask and not question:
         st.warning("Please type a question first!")
-
-else:
-    st.markdown("""
-    <div style='text-align:center; padding:20px;
-    background:rgba(255,255,255,0.02);
-    border:1px solid rgba(255,255,255,0.06);
-    border-radius:12px;'>
-        <span style='color:#444; font-size:14px;'>
-            👈 Upload a PDF from the sidebar to start
-        </span>
-    </div>
-    """, unsafe_allow_html=True)
